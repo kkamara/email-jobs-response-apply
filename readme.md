@@ -62,6 +62,8 @@ sudo mv chromedriver /usr/bin/chromedriver
 chromedriver --version
 ```
 
+Update [config.json](https://github.com/kkamara/email-jobs-response-apply/blob/main/config.json) with your real credentials.
+
 ## Usage
 
 [XPath cheat sheet](https://devhints.io/xpath).

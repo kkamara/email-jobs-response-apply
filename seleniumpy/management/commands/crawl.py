@@ -13,11 +13,19 @@ from selenium.webdriver.common.keys import Keys
 class Command(BaseCommand):
     help = 'help text'
 
+    def add_arguments(self, parser):
+        # parser.add_argument("--email", type=str, help='Your Gmail address.')
+        pass
+    
     def handle(self, *args, **options):
         '''
         The Selenium Python Documentation:
             https://www.selenium.dev/documentation/
         '''
+        config_file = open(
+            os.path.join(settings.BASE_DIR, 'config.json'),'r')
+        config = json.loads(config_file.read())
+        
         try:
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument('--disable-extensions')
@@ -38,14 +46,14 @@ class Command(BaseCommand):
             el = browser.find_element(
                 By.XPATH, "//input[@id='identifierId']")
             
-            el.send_keys('kamaracomputers@gmail.com'+Keys.ENTER)
+            el.send_keys(config['email']+Keys.ENTER)
 
             del el
             time.sleep(1)
 
             browser.find_element(
                 By.XPATH, "//input[@id='password']").send_keys(
-                ''+Keys.ENTER)
+                config['password']+Keys.ENTER)
 
             # "//input[@id='phoneNumber']"
 
@@ -53,14 +61,6 @@ class Command(BaseCommand):
             self.screenshot(browser, name='debug')
             # if 'Thisisnotinpagesource.' in browser.page_source:
             #     raise RuntimeError('We were detected.')            
-            # time.sleep(1)
-
-            # el = browser.find_element(
-            #     By.XPATH, "//a[@href='tel:+447956694595'][2]")
-            # self.screenshot(browser, el=el, name='number')
-            # el.click()
-            
-            # time.sleep(1)
 
             browser.quit()
             self.stdout.write(self.style.SUCCESS('Success'))
