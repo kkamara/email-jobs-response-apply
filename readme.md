@@ -2,7 +2,7 @@
 
 # email-jobs-response-apply
 
-(11-Aug-2023) See your Python code do web browsing on your screen with GUI.
+💻 (11-Aug-2023) See your Python code do web browsing on your screen with GUI.
 
 * [Important note:](#note)
 
