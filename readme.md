@@ -1,6 +1,6 @@
 <img src="https://github.com/kkamara/useful/raw/main/selenium-py.png" alt="selenium-py.png" />
 
-# python-selenium
+# email-jobs-response-apply
 
 (2021) See your Python code do web browsing on your screen with GUI.
 
@@ -66,7 +66,7 @@ chromedriver --version
 
 [XPath cheat sheet](https://devhints.io/xpath).
 
-Update the command at [./management/commands/crawl.py](https://raw.githubusercontent.com/kkamara/selenium-py/main/seleniumpy/management/commands/crawl.py)
+Update the command at [./management/commands/crawl.py](https://raw.githubusercontent.com/kkamara/selenium-py/main/email-jobs-response-apply/management/commands/crawl.py)
 
 ```bash
 alias py3="python3"
@@ -102,7 +102,7 @@ View the api collection [here](https://documenter.getpostman.com/view/17125932/U
 
 ## Admin
 
-Admin creds are set in [./compose/local/django/start](https://raw.githubusercontent.com/kkamara/python-selenium/main/compose/local/django/start)
+Admin creds are set in [./compose/local/django/start](https://raw.githubusercontent.com/kkamara/email-jobs-response-apply/main/compose/local/django/start)
 
 ```bash
 export DJANGO_SUPERUSER_PASSWORD=secret
@@ -125,7 +125,7 @@ py3 manage.py collectstatic
 
 ![docker-mailhog.png](https://raw.githubusercontent.com/kkamara/useful/main/docker-mailhog.png)
 
-Mail environment credentials are at [.env](https://raw.githubusercontent.com/kkamara/python-selenium/main/.env.example).
+Mail environment credentials are at [.env](https://raw.githubusercontent.com/kkamara/email-jobs-response-apply/main/.env.example).
 
 The [mailhog](https://github.com/mailhog/MailHog) docker image runs at `http://localhost:8025`.
 
