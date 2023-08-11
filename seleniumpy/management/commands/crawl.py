@@ -33,23 +33,34 @@ class Command(BaseCommand):
                 chrome_options.add_argument('--disable-dev-shm-usage')
             browser = webdriver.Chrome(options=chrome_options)
             
-            browser.get('https://www.kelvinkamara.com')
+            browser.get('https://mail.google.com/mail/u/0/#search/label%3Aunread+newer%3A08-11-2023/FMfcgzGtwWMNnXpvcBBmMCKfbqLDVXWS')
 
-            self.screenshot(browser, name='debug')
+            el = browser.find_element(
+                By.XPATH, "//input[@id='identifierId']")
+            
+            el.send_keys('kamaracomputers@gmail.com'+Keys.ENTER)
 
-            if 'Thisisnotinpagesource.' in browser.page_source:
-                raise RuntimeError('We were detected.')            
+            del el
             time.sleep(1)
 
             browser.find_element(
-                By.XPATH, "//a[@id='contact-me-link']").click()
+                By.XPATH, "//input[@id='password']").send_keys(
+                ''+Keys.ENTER)
 
-            el = browser.find_element(
-                By.XPATH, "//a[@href='tel:+447956694595'][2]")
-            self.screenshot(browser, el=el, name='number')
-            el.click()
+            # "//input[@id='phoneNumber']"
+
+            time.sleep(60)
+            self.screenshot(browser, name='debug')
+            # if 'Thisisnotinpagesource.' in browser.page_source:
+            #     raise RuntimeError('We were detected.')            
+            # time.sleep(1)
+
+            # el = browser.find_element(
+            #     By.XPATH, "//a[@href='tel:+447956694595'][2]")
+            # self.screenshot(browser, el=el, name='number')
+            # el.click()
             
-            time.sleep(1)
+            # time.sleep(1)
 
             browser.quit()
             self.stdout.write(self.style.SUCCESS('Success'))

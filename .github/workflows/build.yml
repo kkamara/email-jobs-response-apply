@@ -21,7 +21,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: 'secret'
-          MYSQL_DATABASE: 'python_selenium'
+          MYSQL_DATABASE: 'email_jobs_response_apply'
           MYSQL_USER: 'user'
           MYSQL_PASSWORD: 'secret'
         ports:
