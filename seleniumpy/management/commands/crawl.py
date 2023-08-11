@@ -65,7 +65,7 @@ class Command(BaseCommand):
             time.sleep(3)
 
             browser.find_element(
-                By.XPATH, "//input[@id='password']").send_keys(
+                By.XPATH, "//input[@type='password']").send_keys(
                 config['password']+Keys.ENTER)
 
             # "//input[@id='phoneNumber']"
