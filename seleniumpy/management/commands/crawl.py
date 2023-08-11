@@ -83,6 +83,10 @@ class Command(BaseCommand):
 
             time.sleep(30)
             
+            browser.get(config['email_page_link'])
+
+            time.sleep(30)
+
             self.screenshot(browser, name='debug')
             # if 'Thisisnotinpagesource.' in browser.page_source:
             #     raise RuntimeError('We were detected.')
