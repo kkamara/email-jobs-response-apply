@@ -68,12 +68,28 @@ class Command(BaseCommand):
                 By.XPATH, "//input[@type='password']").send_keys(
                 config['password']+Keys.ENTER)
 
-            # "//input[@id='phoneNumber']"
+            time.sleep(1)
+
+            browser.find_element(
+                By.XPATH, "//input[@type='checkbox']").click()
+            
+            time.sleep(3)
+
+            browser.find_element(
+                By.XPATH, "//input[@type='tel']").send_keys(
+                config['phone_number']+Keys.ENTER)
+            
+            # //input[@type='tel']
+            # browser.find_element()
 
             time.sleep(60)
             self.screenshot(browser, name='debug')
             # if 'Thisisnotinpagesource.' in browser.page_source:
             #     raise RuntimeError('We were detected.')            
+
+            '''
+                Todo: Update user agent on the fly.
+            '''
 
             browser.quit()
             self.stdout.write(self.style.SUCCESS('Success'))
