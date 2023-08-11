@@ -9,6 +9,7 @@ import json
 import time
 import logging
 import phonenumbers
+import random
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -45,8 +46,9 @@ class Command(BaseCommand):
             chrome_options.add_argument('--disable-gpu')
             chrome_options.add_argument('--no-sandbox')
             chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-            userAgent = 'Mozilla/5.0 (BB10; Touch) AppleWebKit/537.1+ (KHTML, like Gecko) Version/10.0.0.1337 Mobile Safari/537.1+'
-            chrome_options.add_argument('--user-agent='+userAgent)
+            user_agent = self.get_random_user_agent()
+            logging.info(f'Using User Agent : '+user_agent)
+            chrome_options.add_argument('--user-agent='+user_agent)
             # Use SELENIUM_HEADLESS in .env to remove GUI.
             if settings.SELENIUM_HEADLESS == True or settings.APP_ENV == 'testing':
                 chrome_options.add_argument('--headless')
@@ -78,18 +80,12 @@ class Command(BaseCommand):
             browser.find_element(
                 By.XPATH, "//input[@type='tel']").send_keys(
                 config['phone_number']+Keys.ENTER)
-            
-            # //input[@type='tel']
-            # browser.find_element()
 
-            time.sleep(60)
+            time.sleep(30)
+            
             self.screenshot(browser, name='debug')
             # if 'Thisisnotinpagesource.' in browser.page_source:
-            #     raise RuntimeError('We were detected.')            
-
-            '''
-                Todo: Update user agent on the fly.
-            '''
+            #     raise RuntimeError('We were detected.')
 
             browser.quit()
             self.stdout.write(self.style.SUCCESS('Success'))
@@ -126,3 +122,9 @@ class Command(BaseCommand):
     def validate_phonenumber(self, subject):
         return True if phonenumbers.parse(
             subject, None) is not None else False
+    
+    def get_random_user_agent(self):
+        user_agents = [
+            'Mozilla/5.0 (BB10; Touch) AppleWebKit/537.1+ (KHTML, like Gecko) Version/10.0.0.1337 Mobile Safari/537.1+', 'Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.1.0; en-US) AppleWebKit/536.2+ (KHTML, like Gecko) Version/7.2.1.0 Safari/536.2+', 'Mozilla/5.0 (BlackBerry; U; BlackBerry 9900; en-US) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.0.0.187 Mobile Safari/534.11+']
+        key = random.randint(0, 2)
+        return user_agents[key]
